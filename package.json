@@ -7,7 +7,8 @@
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback",
     "seed": "knex seed:run",
-    "test": "cross-env NODE_ENV=testing jest --watch --verbose --runInBand"
+    "test": "cross-env NODE_ENV=testing jest --watch --verbose --runInBand",
+    "resetdb": "npm run rollback && npm run migrate && npm run seed"
   },
   "devDependencies": {
     "@types/jest": "^27.0.1",
@@ -24,6 +25,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "helmet": "^4.6.0",
+    "jsonwebtoken": "^8.5.1",
     "knex": "^0.95.7",
     "sqlite3": "^5.0.2"
   },

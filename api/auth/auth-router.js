@@ -1,9 +1,22 @@
 const router = require("express").Router();
 const { checkUsernameExists, validateRoleName } = require('./auth-middleware');
+const jwt = require('jsonwebtoken')
 const { JWT_SECRET } = require("../secrets"); // use this secret!
 const bcrypt = require('bcrypt')
 
-const Users = require('../users/users-model')
+const Users = require('../users/users-model');
+
+const buildToken = (user) => {
+  const payload = {
+    subject: user.user_id,
+    username: user.username,
+    role_name: user.role_name
+  }
+
+  const options = { expiresIn: '1d'}
+
+  return jwt.sign(payload, JWT_SECRET, options)
+}
 
 router.post("/register", validateRoleName, (req, res, next) => {
   /**
@@ -52,6 +65,7 @@ router.post("/login", checkUsernameExists, (req, res, next) => {
       "role_name": "admin" // the role of the authenticated user
     }
    */
+    res.status(200).json({ message: 'hello!!!!!'})
 });
 
 module.exports = router;
