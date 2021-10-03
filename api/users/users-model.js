@@ -43,6 +43,7 @@ function findBy(filter) {
       .leftJoin('roles as r', 'r.role_id', 'u.role_id')
       .select('u.user_id', 'u.username', 'u.password', 'r.role_name')
       .where(filter)
+
 }
 
 function findById(user_id) {
@@ -60,6 +61,7 @@ function findById(user_id) {
     .leftJoin('roles as r', 'r.role_id', 'u.role_id')
     .select('u.user_id', 'u.username', 'r.role_name')
     .where('u.user_id', user_id)
+    .first()
 }
 
 /**
